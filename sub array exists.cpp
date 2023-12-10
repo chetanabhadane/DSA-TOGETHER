@@ -1,0 +1,16 @@
+class Solution {
+public:
+    
+    bool subArrayExists(int arr[], int n) {
+        unordered_map<int, bool> sumMap;
+        int sum = 0;
+        for (int i = 0; i < n; i++) {
+            sum += arr[i];
+            if (sum == 0 || sumMap[sum] == true) {
+                return true;
+            }
+            sumMap[sum] = true;
+        }
+        return false;
+    }
+};
