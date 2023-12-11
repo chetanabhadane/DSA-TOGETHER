@@ -1,0 +1,25 @@
+class Solution{   
+public:
+    long maximumSumSubarray(int K, vector<int> &Arr , int N){
+        // code here 
+        if(K==N){
+            long sum=0;
+            for(int i=0;i<N;i++){
+                sum+=Arr[i];
+            }
+            return sum;
+        }else{
+            
+            long sw=0;
+            for(int i=0;i<K;i++){
+                sw+=Arr[i];
+            }
+            long maxi=sw;
+            for(int i=K;i<N;i++){
+                sw=sw+(Arr[i]-Arr[i-K]);
+                maxi=max(maxi,sw);
+            }
+            return maxi;
+        }
+    }
+};
