@@ -1,0 +1,36 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+class Solution {
+public:
+    long countStrings(int n) {
+        // Initialize a vector to store the count of valid strings for each length
+        vector<long> dp(n + 1);
+
+        // Base cases
+        dp[0] = 1;  // Empty string is a valid string
+        dp[1] = 2;  // Strings of length 1: '0' and '1'
+
+        // Modulo value to avoid integer overflow
+        int mod = 1e9 + 7;
+
+        // Build the solution for strings of lengths 2 to n
+        for (int i = 2; i <= n; i++) {
+            // The count for length i is the sum of counts for lengths i-1 and i-2
+            dp[i] = (dp[i - 1] + dp[i - 2]) % mod;
+        }
+
+        // Return the final result for strings of length n, taking modulo into account
+        return dp[n] % mod;
+    }
+};
+
+int main() {
+    Solution solution;
+    int n = 5; // You can change the value of n as needed
+    cout << "Number of valid strings of length " << n << ": " << solution.countStrings(n) << endl;
+
+    return 0;
+}
