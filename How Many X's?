@@ -1,0 +1,19 @@
+class Solution {
+  public:
+    int countX(int L, int R, int X) {
+        // code here
+        int s=0,n=0;
+        for(int i=L+1;i<R;i++)
+        {
+            int a=i;
+            while(a!=0)
+            {
+                n=a%10;
+                a=a/10;
+                if(n==X)
+                s=s+1;
+            }
+        }
+        return s;
+    }
+};
