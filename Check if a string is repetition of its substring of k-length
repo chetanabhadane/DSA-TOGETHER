@@ -1,0 +1,21 @@
+class Solution{
+public:
+    
+    int kSubstrConcat (int n, string s, int k)
+    {
+        if(n%k) return 0;
+        
+        map<string,int> mp;
+        for(int i=0; i<n; i+=k)
+        {
+            mp[s.substr(i, 2)]+=1;
+        }
+        int maxi=0;
+        for(auto val:mp)
+        {
+            maxi=max(maxi, val.second);
+        }
+        if(maxi<(n/k)-1) return 0;
+        return 1;
+    }
+};
