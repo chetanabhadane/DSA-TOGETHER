@@ -1,0 +1,48 @@
+#include <iostream>
+#include <vector>
+#include <climits>
+
+class Solution {
+public:
+    int maxSumWithK(std::vector<int>& a, int n, int k) {
+        // Code here
+        int sum = 0;
+        for (int i = 0; i < k; ++i) {
+            sum += a[i];
+        }
+
+        int last = 0;
+        int j = 0;
+        int ans = INT_MIN;
+        ans = std::max(ans, sum);
+
+        for (int i = k; i < n; ++i) {
+            sum += a[i];
+            last += a[j];
+            ++j;
+            ans = std::max(ans, sum);
+
+            if (last < 0) {
+                sum -= last;
+                ans = std::max(ans, sum);
+                last = 0;
+            }
+        }
+
+        return ans;
+    }
+};
+
+int main() {
+    // Example usage
+    Solution solution;
+    std::vector<int> arr = {1, -2, 3, 4, -1, 2, 1, -5, 4};
+    int n = arr.size();
+    int k = 3;
+
+    int result = solution.maxSumWithK(arr, n, k);
+
+    std::cout << "Maximum sum of subarray with length " << k << ": " << result << std::endl;
+
+    return 0;
+}
