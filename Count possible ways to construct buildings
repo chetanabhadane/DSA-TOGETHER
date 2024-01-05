@@ -1,0 +1,26 @@
+#include <iostream>
+
+class Solution {
+public:
+    int TotalWays(int N) {
+        int b = 1;
+        int s = 1;
+        int res = 0;
+        int mod = 1000000007;
+
+        for (int i = 0; i < N; ++i) {
+            res = (b % mod + s % mod) % mod;
+            b = s % mod;
+            s = res % mod;
+        }
+
+        return (static_cast<long long>(res) * res) % mod;
+    }
+};
+
+int main() {
+    Solution solution;
+    int result = solution.TotalWays(5); // Replace 5 with your desired N
+    std::cout << "Result: " << result << std::endl;
+    return 0;
+}
