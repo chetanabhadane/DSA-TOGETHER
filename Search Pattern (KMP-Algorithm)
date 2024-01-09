@@ -1,0 +1,23 @@
+class Solution
+{
+    public:
+        vector <int> search(string pat, string txt)
+        {
+            vector<int>ans;
+            
+            int i =0;
+            int idx = txt.find(pat);
+            
+            while(idx != -1){
+                
+                ans.push_back(idx+1);
+                
+                idx = txt.find(pat,idx+1);
+            }
+            
+            return ans.empty()?vector<int>{-1} : ans;
+            
+            //code here
+        }
+     
+};
