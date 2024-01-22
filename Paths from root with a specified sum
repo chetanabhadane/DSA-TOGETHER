@@ -1,0 +1,26 @@
+class Solution
+{
+    
+    public:
+    void findpath(Node *root, int sum,vector<vector<int>> &ans,vector<int> subans,int num){
+        if(root==NULL)return;
+        num+=root->key;
+        subans.push_back(root->key);
+        if(num==sum){
+            ans.push_back(subans);
+        }
+            findpath(root->left,sum,ans,subans,num);
+            findpath(root->right,sum,ans,subans,num);
+        
+    }
+    vector<vector<int>> printPaths(Node *root, int sum)
+    {
+        //code here
+        vector<vector<int>> ans;
+        vector<int> subans;
+        int num=0;
+        findpath(root,sum,ans,subans,num);
+        return ans;
+    }
+};
+
