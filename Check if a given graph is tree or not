@@ -1,0 +1,41 @@
+class Solution {
+public:
+    bool dfs(int node, vector<int> &parent, vector<bool> &visited, vector<int> adj[]) {
+        visited[node] = true;
+        for (int const &neigh : adj[node]) {
+            if (visited[neigh] == false) {
+                parent[neigh] = node;
+                bool ans = dfs(neigh, parent, visited, adj);
+                if (ans == 1) return true;
+            } else if (neigh != parent[node]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    int isTree(int n, int m, vector<vector<int>> &edges) {
+        vector<int> adj[n];
+        for (int i = 0; i < m; i++) {
+            int u = edges[i][0];
+            int v = edges[i][1];
+            adj[u].push_back(v);
+            adj[v].push_back(u);
+        }
+        vector<bool> visited(n, false);
+        vector<int> parent(n, -1);
+
+        int rootCount = 0;  // To count the number of nodes with parent -1
+        for (int i = 0; i < n; i++) {
+            if (visited[i] == false) {
+                bool ans = dfs(i, parent, visited, adj);
+                if (ans == 1) return 0;
+                rootCount++;
+            }
+        }
+
+        if (rootCount != 1) return 0;  // Check for exactly one root
+
+        return 1;
+    }
+};
