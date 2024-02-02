@@ -1,0 +1,23 @@
+class Solution{
+  public:
+    /*You are required to complete this method */
+    int atoi(string s) {
+        //Your code here
+        int ans = 0, p = 1;
+        int n = s.size();
+        for(int i=0; i<n; i++){
+            if(s[i]>47 && s[i]<58){
+                ans = (10*ans)+(s[i]-'0');
+            }
+            else{
+                if(s[0]=='-' && i==0){
+                    p = -1;
+                }
+                else
+                    return -1;
+            }
+        }
+        return (ans*p);
+    }
+};
+ 
