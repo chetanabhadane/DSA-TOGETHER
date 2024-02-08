@@ -1,0 +1,32 @@
+class Solution {
+public:
+    // Function to calculate the maximum level in the binary tree
+    int lvl(Node* root, int dis) {
+        if (root == NULL) 
+            return dis;
+        // Recursively calculate the maximum level in the left and right subtrees
+        int left = lvl(root->left, dis + 1);
+        int right = lvl(root->right, dis + 1);
+        // Return the maximum of left and right levels
+        return max(left, right);
+    }
+
+    // Function to traverse the binary tree and check if all leaf nodes are at the same level
+    bool traverse(Node* root, int level, int curr) {
+        if (root == NULL) 
+            return true;
+        // If the current node is a leaf node, check if its level is equal to the maximum level
+        if (root->left == NULL && root->right == NULL) 
+            return (level == curr) ? true : false;
+        // Recursively check if all leaf nodes in the left and right subtrees are at the same level
+        return traverse(root->left, level, curr + 1) && traverse(root->right, level, curr + 1);
+    }
+
+    // Function to check if all leaf nodes in the binary tree are at the same level
+    bool check(Node* root) {
+        // Calculate the maximum level in the binary tree
+        int level = lvl(root, 0) - 1;
+        // Check if all leaf nodes are at the same level
+        return traverse(root, level, 0);
+    }
+};
