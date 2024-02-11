@@ -1,0 +1,24 @@
+class Solution{
+public:
+    vector<int> recamanSequence(int n){
+        // code here
+        vector<int> ans(n);
+        ans[0] = 0;
+        
+        unordered_map<int,int>mpp;
+        mpp[0]++;
+        
+        for(int i = 1; i < n; i++){
+            
+            int x = ans[i-1] - i;
+            if(x > 0 && mpp.find(x) == mpp.end()){
+                ans[i] = x;
+            }
+            else{
+                ans[i] = ans[i-1] + i;
+            }
+            mpp[ans[i]]++;
+        }
+        return ans;
+    }
+};
