@@ -1,0 +1,23 @@
+class Solution {
+    void dfs(Node* &node, Node *toClone, unordered_map<Node *, Node *> &mp)
+    {
+        mp[toClone] = node;
+        for(auto &it: toClone->neighbors)
+        {
+            if(mp[it])node->neighbors.push_back(mp[it]);
+            else
+            {
+                Node *next = new Node(it->val);
+                dfs(next, it, mp);
+                node->neighbors.push_back(next);
+            }
+        }
+    }
+public:
+    Node* cloneGraph(Node* node) {
+        unordered_map<Node *, Node *> mp;
+        Node *start = new Node(node->val);
+        dfs(start, node, mp);
+        return start;
+    }
+};
