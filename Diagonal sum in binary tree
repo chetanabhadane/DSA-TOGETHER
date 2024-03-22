@@ -1,0 +1,55 @@
+class Solution {
+  public:
+    vector<int> diagonalSum(Node* root)
+    {
+        vector<int>a;
+        queue<Node*>q;
+        Node *temp = root;
+        if(root==NULL)
+        {
+            return a;
+        }
+        int sum =0;
+        while(temp!=NULL)
+        {
+            sum+=temp->data;
+            q.push(temp);
+            temp = temp->right;
+        }
+        a.push_back(sum);
+        sum = 0;
+        queue<Node*>b;
+        while(!q.empty())
+        {
+            Node *t = q.front();
+            q.pop();
+            if(t->left!=NULL)
+            {
+              t = t->left;
+              while(t!=NULL)
+              {
+                sum+=t->data;
+                b.push(t);
+                t=t->right;
+              }
+            }
+            if(q.empty())
+            {
+                
+                if(b.empty())
+                {
+                    break;
+                }
+                a.push_back(sum);
+                while(!b.empty())
+                {
+                    q.push(b.front());
+                    b.pop();
+                }
+                sum = 0;
+            }
+        }
+        return a;
+      
+    }
+};
